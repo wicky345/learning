@@ -1,7 +1,5 @@
  <template>
  <div>
-   <span>helloworld</span>
- <p>jkhh</p>
 <el-menu
   :default-active="activeIndex2"
   class="el-menu-demo"
