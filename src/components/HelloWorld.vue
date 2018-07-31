@@ -1,51 +1,81 @@
- <template>
- <div>
-<el-menu
-  :default-active="activeIndex2"
-  class="el-menu-demo"
-  mode="horizontal"
-  @select="handleSelect"
-  background-color="#545c64"
-  text-color="#fff"
-  active-text-color="#ffd04b">
-  <el-menu-item index="1">处理中心</el-menu-item>
-  <el-submenu index="2">
-    <template slot="title">我的工作台</template>
-    <el-menu-item index="2-1">选项1</el-menu-item>
-    <el-menu-item index="2-2">选项2</el-menu-item>
-    <el-menu-item index="2-3">选项3</el-menu-item>
-    <el-submenu index="2-4">
-      <template slot="title">选项4</template>
-      <el-menu-item index="2-4-1">选项1</el-menu-item>
-      <el-menu-item index="2-4-2">选项2</el-menu-item>
-      <el-menu-item index="2-4-3">选项3</el-menu-item>
-    </el-submenu>
-  </el-submenu>
-  <el-menu-item index="3" disabled>消息中心</el-menu-item>
-  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-</el-menu>
+<template>
+<div>
+<el-input placeholder="请输入你的名字" v-model="msgname" size="large"></el-input>
+<el-input placeholder="请输入你的年龄" v-model="msgage" size="large"></el-input>
+<el-button type="primary" @click="add()">添加信息</el-button><br/>
+<el-input placeholder="请输入搜索关键字" v-model="searchmsg" size="large"></el-input>
+<el-button type="primary" @click="search(searchmsg,tabledata)">搜索</el-button>
+<el-table :data="tabledata" border style="width:60%;text-align:left">
+<el-table-column prop="id" label="序号" width="180">
+</el-table-column>
+<el-table-column prop="name" label="姓名" width="180">
+</el-table-column>
+<el-table-column prop="age" label="年龄" width="180">
+</el-table-column>
+<el-table-column label="delete" width="120">
+<template slot-scope="scope">
+        <el-button
+          @click="Delete(scope.$index, tabledata)"
+          type="primary"
+          size="small">
+          删除
+        </el-button>
+</template>
+</el-table-column>
+<el-table-column label="edit" width="120">
+  <template slot-scope="scope">
+    <el-button 
+    type="primary" 
+    size="small"
+     @click="edit(scope.$index)">编辑</el-button>
+    </template>
+    </el-table-column>
+</el-table>
 </div>
 </template>
 <script>
 export default {
-    data() {
-      return {
-        activeIndex: '1',
-        activeIndex2: '1'
-      };
-    },
-        methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    },
-  components: {},
-
-  computed: {},
-
-  mounted() {
-    
+data() {
+return {
+msgname:'',
+msgage:'',
+searchmsg:'',
+tabledata:[{id:'1',name:'max',age:'20'},
+{id:'2',name:'nancy',age:'30'},
+{id:'3',name:'cindy',age:'40'}]
+}
+},
+methods: {
+add(){
+this.tabledata.push({id:this.tabledata.length+1,name:this.msgname,age:this.msgage})
+},
+Delete(index,rows){
+rows.splice(index,1);
+},
+edit(index)
+{
+  var newname=prompt("请输入更新后姓名");
+  var newage=prompt("请输入更新后年龄");
+  this.tabledata[index].name=newname;
+  this.tabledata[index].age=newage;
+},
+search(searchmsg,tabledata)
+{
+  var searchResult=[];
+  var items=this.tabledata;
+  for(var i=0;i<items.length;i++)
+  {
+    var msg=items[i].name+','+items[i].age;
+    if(msg.indexOf(searchmsg)>-1)
+    {
+      searchResult.push(items[i]);
+    }
   }
+  this.tabledata=searchResult;
+ 
+}
+
+}
 };
 </script>
 
@@ -53,33 +83,34 @@ export default {
 <style scoped>
 h1,
 h2 {
-  font-weight: normal;
+font-weight: normal;
 }
 ul {
-  list-style-type: none;
-  padding: 0;
+list-style-type: none;
+padding: 0;
 }
 li {
-  display: inline-block;
-  margin: 0 10px;
+display: inline-block;
+margin: 0 10px;
 }
 a {
-  color: #42b983;
+color: #42b983;
 }
-  .el-header {
-    background-color: #B3C0D1;
-    color: #333;
-    line-height: 60px;
-  }
-  
-  .el-aside {
-    color: #333;
-  }
-   .el-select .el-input {
-    width: 130px;
-  }
-  .input-with-select .el-input-group__prepend {
-    background-color: #fff;
-  }
+.el-header {
+background-color: #B3C0D1;
+color: #333;
+line-height: 60px;
+}
+.el-aside {
+color: #333;
+}
+.el-select .el-input {
+width: 130px;
+}
+.input-with-select .el-input-group__prepend {
+background-color: #fff;
+}
+.el-input{
+  width:200px;
+}
 </style>
-
