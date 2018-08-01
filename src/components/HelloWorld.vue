@@ -5,7 +5,7 @@
 <el-button type="primary" @click="add()">添加信息</el-button>
 <el-input placeholder="请输入搜索关键字" v-model="searchmsg" size="large"></el-input>
 <el-button type="primary" @click="search(searchmsg,tabledata)">搜索</el-button>
-<el-table :data="tabledata" border style="width:60%;text-align:left">
+<el-table :data="tabledata" border style="width:58%;text-align:left">
 <el-table-column prop="id" label="序号" width="180">
 </el-table-column>
 <el-table-column prop="name" label="姓名" width="180">
