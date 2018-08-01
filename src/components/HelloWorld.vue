@@ -2,7 +2,7 @@
 <div>
 <el-input placeholder="请输入你的名字" v-model="msgname" size="large"></el-input>
 <el-input placeholder="请输入你的年龄" v-model="msgage" size="large"></el-input>
-<el-button type="primary" @click="add()">添加信息</el-button><br/>
+<el-button type="primary" @click="add()">添加信息</el-button>
 <el-input placeholder="请输入搜索关键字" v-model="searchmsg" size="large"></el-input>
 <el-button type="primary" @click="search(searchmsg,tabledata)">搜索</el-button>
 <el-table :data="tabledata" border style="width:60%;text-align:left">
@@ -41,9 +41,9 @@ export default {
       msgage: "",
       searchmsg: "",
       tabledata: [
-        { id: "1", name: "max", age: "20" },
-        { id: "2", name: "nancy", age: "30" },
-        { id: "3", name: "cindy", age: "40" }
+        { id: "1", name: "nancy", age: "20" },
+        { id: "2", name: "cindy", age: "30" },
+        { id: "3", name: "lucy", age: "40" }
       ]
     };
   },
@@ -112,5 +112,12 @@ a {
 }
 .el-input {
   width: 200px;
+  float: left;
+  margin-bottom: 10px;
+}
+.el-button {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 </style>
